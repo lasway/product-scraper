@@ -171,3 +171,99 @@ exports.triggerScraping = async (req, res) => {
     });
   }
 };
+
+// exports.shortUrl = async (req, res) => {
+//   try {
+//     let { url, expiredHours } = req.body;
+
+//     if (!url) {
+//       return res.status(400).json({
+//         success: false,
+//         error: "URL is required",
+//       });
+//     }
+
+//     if (!url.startsWith("http:/") && !url.startsWith("https://")) {
+//       return res.status(400).json({
+//         success: false,
+//         error: "URL must start with http:// or https://",
+//       });
+//     }
+//     try {
+//       new URL(url);
+//     } catch (e) {
+//       return res.status(400).json({
+//         success: false,
+//         error: "Invalid URL format",
+//       });
+//     }
+
+//     const urlData = createShortCode(url, expiredHours);
+//     res.json({
+//       success: true,
+//       shortCode: urlData.shortCode,
+//       originalUrl: urlData.originalUrl,
+//       expireTime: urlData.expireTime,
+//     });
+//   } catch (e) {
+//     res.status(500).json({
+//       success: false,
+//       error: `Error getting short link: ${e.message}`,
+//     });
+//   }
+// };
+
+// exports.redirectUrl = async (req, res) => {
+//   try {
+//     const urlData = getUrl(req.params.shortCode);
+//     if (!urlData) {
+//       return res.status(404).json({
+//         success: false,
+//         error: "Short code not found",
+//       });
+//     }
+
+//     if (urlData.expireTime && new Date() > new Date(urlData.expireTime)) {
+//       return res.status(410).json({
+//         success: false,
+//         error: "Short code has expired",
+//       });
+//     }
+//     incrementClick(req.params.shortCode);
+//     res.redirect(urlData.originalUrl);
+//   } catch (e) {
+//     res.status(500).json({
+//       success: false,
+//       error: `Error redirecting URL: ${e.message}`,
+//     });
+//   }
+// };
+
+// exports.getClicks = async (req, res) => {
+//   try {
+//     const urlData = getUrl(req.params.shortCode);
+//     if (!urlData) {
+//       return res.status(404).json({
+//         success: false,
+//         error: "Short code not found",
+//       });
+//     }
+
+//     if (urlData.expireTime && new Date() > new Date(urlData.expireTime)) {
+//       return res.status(410).json({
+//         success: false,
+//         error: "Short code has expired",
+//       });
+//     }
+
+//     res.status(200).json({
+//       success: true,
+//       clickCount: urlData.click,
+//     });
+//   } catch (e) {
+//     res.status(500).json({
+//       success: false,
+//       error: `Error getting clicks: ${e.message}`,
+//     });
+//   }
+// };
